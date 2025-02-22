@@ -8,4 +8,4 @@ __pycache__
 
 scope/pulic/HRMS/
 scope/www/scope.html
-.env
+scope/HRMS/.env
