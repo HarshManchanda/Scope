@@ -5,3 +5,7 @@
 tags
 node_modules
 __pycache__
+
+scope/pulic/HRMS/
+scope/www/scope.html
+.env
