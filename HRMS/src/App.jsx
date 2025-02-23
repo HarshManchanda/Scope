@@ -11,6 +11,8 @@ import React, { useState, useEffect } from "react";
 import Home from "./Components/Home";
 import ContentBox from "./Components/ContentBox";
 
+import { FrappeProvider, useFrappeGetDocList} from 'frappe-react-sdk'
+
 // function App(){
 //   return(
 //     <div className="dashboardContainer">
@@ -146,6 +148,7 @@ function App() {
 
   return (
     <div>
+      <FrappeProvider>
       
         <div className="dashboardContainer">
           <Sidebar onLogout={handleLogout} roles={userRoles} />
@@ -165,6 +168,7 @@ function App() {
             {/* <Footer /> */}
           </main>
         </div>
+      </FrappeProvider>
       
     </div>
   );
