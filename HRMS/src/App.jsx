@@ -11,7 +11,7 @@ import React, { useState, useEffect } from "react";
 import Home from "./Components/Home";
 import ContentBox from "./Components/ContentBox";
 
-import { FrappeProvider, useFrappeGetDocList} from 'frappe-react-sdk'
+import { FrappeProvider, useFrappeGetDocList, useFrappeAuth} from 'frappe-react-sdk'
 
 // function App(){
 //   return(
@@ -34,6 +34,8 @@ import { FrappeProvider, useFrappeGetDocList} from 'frappe-react-sdk'
 
 function App() {
   const URL = import.meta.env.VITE_REACT_APP_URL;
+
+  const {currentUser, getUserCookie, login, logout} = useFrappeAuth()
 
   // const [isLoggedIn, setIsLoggedIn] = useState(() => {
   //   // Check local storage for persisted login state
@@ -148,8 +150,11 @@ function App() {
 
   return (
     <div>
-      <FrappeProvider>
-      
+      <FrappeProvider
+        socketPort={import.meta.env.VITE_SOCKET_PORT}
+        siteName={import.meta.env.VITE_SITE_NAME}
+      >
+      {isLoggedIn ? (
         <div className="dashboardContainer">
           <Sidebar onLogout={handleLogout} roles={userRoles} />
           <main className="content">
@@ -168,6 +173,9 @@ function App() {
             {/* <Footer /> */}
           </main>
         </div>
+      ) : (
+        <Login onLoginSuccess={handleLoginSuccess} />
+      )}
       </FrappeProvider>
       
     </div>
@@ -185,12 +193,25 @@ function App() {
 
 // function App(){
 //   return(
-//     <>
-//       <div>
-//         <ApiFetch/>
-//       </div>
-//     </>
+//     <div>
+//       <FrappeProvider
+//         socketPort={import.meta.env.VITE_SOCKET_PORT}
+//         siteName={import.meta.env.VITE_SITE_NAME}
+//       >
+//         <div>
+//           <TestComponent/>
+//         </div>
+
+//       </FrappeProvider>
+//     </div>
 //   )
+// }
+
+
+// const TestComponent = () => {
+//   const { data} = useFrappeGetDocList("User");
+
+//   return <div></div>;
 // }
 
 export default App

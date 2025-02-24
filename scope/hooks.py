@@ -243,4 +243,4 @@ app_license = "mit"
 # }
 
 
-website_route_rules = [{'from_route': '/HRMS/<path:app_path>', 'to_route': 'HRMS'},]
+website_route_rules = [{'from_route': '/scope/<path:app_path>', 'to_route': 'scope'},]
