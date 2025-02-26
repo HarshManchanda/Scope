@@ -35,7 +35,10 @@ import { FrappeProvider, useFrappeGetDocList, useFrappeAuth} from 'frappe-react-
 function App() {
   const URL = import.meta.env.VITE_REACT_APP_URL;
 
-  const {currentUser, getUserCookie, login, logout} = useFrappeAuth()
+  const sessionId = localStorage.getItem("sid");
+  console.log("App session id",sessionId)
+
+  // const {currentUser, getUserCookie, login, logout} = useFrappeAuth()
 
   // const [isLoggedIn, setIsLoggedIn] = useState(() => {
   //   // Check local storage for persisted login state
@@ -57,21 +60,23 @@ function App() {
   const handleLoginSuccess = async (userData) => {
     setIsLoggedIn(true); // Set login state to true after successful login
     localStorage.setItem("isLoggedIn", "true"); // Persist login state
+    console.log("userData.emal: ",userData.email);
     setLoggedInUser(userData.email);
     localStorage.setItem("loggedInUser", JSON.stringify(userData.email));
     await fetchUserRoles(userData.email); // Fetch roles after login
-    // console.log(userData.email)
+    console.log("user: ",userData.email)
   };
 
   const fetchUserRoles = async (email) => {
     try {
-        const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
-            const [key, value] = cookie.split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
+        // const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+        //     const [key, value] = cookie.split("=");
+        //     acc[key] = value;
+        //     return acc;
+        // }, {});
 
-        const sid = cookies.sid;
+        // const sid = cookies.sid;
+        const sid = localStorage.getItem("sid")
 
         if (!sid) return;
 
@@ -104,14 +109,15 @@ function App() {
   }, []);
 
   const handleLogout = async () => {
-    try {
-      const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
-        const [key, value] = cookie.split("=");
-        acc[key] = value;
-        return acc;
-      }, {});
-  
-      const sid = cookies.sid; // Retrieve the session ID from cookies
+    // try {
+    //   const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
+    //     const [key, value] = cookie.split("=");
+    //     acc[key] = value;
+    //     return acc;
+    //   }, {})
+    try{
+
+      const sid = localStorage.getItem("sid"); // Retrieve the session ID from cookies
   
       if (sid) {
         // Make an API call to ERPNext's logout endpoint with the session ID
@@ -124,6 +130,7 @@ function App() {
           console.log("Server session terminated successfully.");
   
           // Clear the session cookie explicitly
+          localStorage.setItem('sid',"")
           document.cookie = "sid=; Path=/; Domain=49.50.93.228; Expires=Thu, 01 Jan 1970 00:00:00 UTC;";
           document.cookie = "sid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 UTC;";
   

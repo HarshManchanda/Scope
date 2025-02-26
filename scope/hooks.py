@@ -243,4 +243,34 @@ app_license = "mit"
 # }
 
 
+from frappe.auth import LoginManager
+import frappe
+
+def custom_set_user_info(self, resume=False):
+    frappe.local.cookie_manager.init_cookies()
+    self.full_name = (" ".join(filter(None, [self.info.first_name, self.info.last_name])))
+
+    if self.info.user_type == "Website User":
+        frappe.local.cookie_manager.set_cookie("system_user", "no")
+        frappe.local.response["message"] = "No App"
+        frappe.local.response["home_page"] = "/jobs"
+    else:
+        frappe.local.cookie_manager.set_cookie("system_user", "yes")
+        frappe.local.response["message"] = "Logged In"
+        frappe.local.response["home_page"] = "/app"
+        frappe.response['user_type'] = self.user_type if self.user_type else None
+        frappe.response['full_name'] = self.full_name if self.full_name else None
+        frappe.response['sid'] = frappe.session.sid  # Send in response
+
+    # Ensure sid is set with proper attributes
+    frappe.local.cookie_manager.set_cookie("sid",frappe.session.sid)
+
+    # Additional cookies
+    frappe.local.cookie_manager.set_cookie("full_name", self.full_name)
+    frappe.local.cookie_manager.set_cookie("user_id", self.user)
+    frappe.local.cookie_manager.set_cookie("user_image", self.info.user_image or "xyz")
+
+LoginManager.set_user_info = custom_set_user_info
+
+
 website_route_rules = [{'from_route': '/scope/<path:app_path>', 'to_route': 'scope'},]

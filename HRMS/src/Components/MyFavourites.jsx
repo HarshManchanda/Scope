@@ -46,12 +46,7 @@ const MyFavourites = ({ onLogout, roles }) => {
     const [dropdownIndex, setDropdownIndex] = useState(null);
 
     const handleCardClick = (item) => {
-        const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
-            const [key, value] = cookie.split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
-        const sid = cookies.sid;
+        const sid = localStorage.getItem("sid")
         if (sid) {
             let formattedItem = item.toLowerCase().replace(/\s+/g, '-');
             let url = `${URL}app/${encodeURIComponent(formattedItem)}?sid=${sid}`;
@@ -63,12 +58,7 @@ const MyFavourites = ({ onLogout, roles }) => {
 
     const handleAddNewClick = (item) => {
         setDropdownIndex(null);
-        const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
-            const [key, value] = cookie.split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
-        const sid = cookies.sid;
+        const sid = localStorage.getItem("sid")
         if (sid) {
             let formattedItem = item.toLowerCase().replace(/\s+/g, '-');
             let url = `${URL}app/${encodeURIComponent(formattedItem)}/new/?sid=${sid}`;

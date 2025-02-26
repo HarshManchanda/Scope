@@ -81,13 +81,7 @@ function ContentBox({ loggedInUser, onLogout, roles }){
     }, [loggedInUser]);
 
     const handleCardClick = (doctype, filter, value) => {
-        const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
-            const [key, value] = cookie.split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
-
-        const sid = cookies.sid; // Retrieve the session ID from cookies
+        const sid = localStorage.getItem("sid")
 
         if (sid) {
             let formattedItem = doctype.toLowerCase().replace(/\s+/g, '-');

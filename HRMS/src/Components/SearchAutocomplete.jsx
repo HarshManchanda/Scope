@@ -48,12 +48,7 @@ function SearchAutocomplete() {
         setResults([]); // Clear results on select
         setShowResults(false); // Close the result box after selection
         // Session management
-        const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
-            const [key, value] = cookie.split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
-        const sid = cookies.sid;
+        const sid = localStorage.getItem("sid")
         if (sid) {
             // Format item for URL
             let formattedItem = item.toLowerCase().replace(/\s+/g, '-');

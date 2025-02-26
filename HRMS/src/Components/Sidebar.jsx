@@ -69,12 +69,7 @@ function Sidebar({ onLogout, roles }) {
     console.log("HR User:", isHRUser);
 
     const handleCardClick = (item) => {
-        const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
-            const [key, value] = cookie.split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
-        const sid = cookies.sid;
+        const sid = localStorage.getItem("sid")
         if (sid) {
             let formattedItem = item.toLowerCase().replace(/\s+/g, '-');
             let url = `${URL}app/${encodeURIComponent(formattedItem)}?sid=${sid}`;
