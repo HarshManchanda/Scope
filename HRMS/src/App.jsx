@@ -29,7 +29,21 @@ function App() {
   const URL = import.meta.env.VITE_REACT_APP_URL;
 
   const sessionId = localStorage.getItem("sid");
-  console.log("App session id",sessionId)
+  console.log("App session id",sessionId);
+
+  // const getSessionId = async () => {
+  //   try {
+  //     const response = await fetch(`${URL}api/method/get_session`, {
+  //       credentials: "include",
+  //     });
+  //     const data = await response.json();
+  //     console.log("Get session Session ID:", data.sid);
+  //   } catch (error) {
+  //     console.error("Error fetching session ID:", error);
+  //   }
+  // };
+
+  // getSessionId();
 
   // const {currentUser, getUserCookie, login, logout} = useFrappeAuth()
 
@@ -123,7 +137,7 @@ function App() {
           console.log("Server session terminated successfully.");
   
           // Clear the session cookie explicitly
-          localStorage.setItem('sid',"")
+          localStorage.removeItem("sid");
           document.cookie = "sid=; Path=/; Domain=49.50.93.228; Expires=Thu, 01 Jan 1970 00:00:00 UTC;";
           document.cookie = "sid=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 UTC;";
   
@@ -132,14 +146,17 @@ function App() {
           localStorage.removeItem("isLoggedIn");
   
           console.log("Logged out successfully and session cookie destroyed.");
+          window.location.reload();
         } else {
           console.error("Logout failed on the server.");
         }
       } else {
         // Reset application state
         setIsLoggedIn(false);
+        localStorage.removeItem("sid");
         localStorage.removeItem("isLoggedIn");
         console.error("Session ID not found.");
+        window.location.reload();
       }
     } catch (error) {
       console.error("Error during logout:", error);

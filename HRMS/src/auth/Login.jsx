@@ -12,6 +12,24 @@ function Login({ onLoginSuccess }) {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // Toggle state for password
 
+  const getSessionId = async () => {
+      try {
+          const response = await fetch(`${URL}api/method/get_session`, {
+              credentials: "include",
+          });
+          const data = await response.json();
+          
+          if (data.sid) {
+              console.log("Get Session ID:", data.sid);
+              localStorage.setItem("sid", data.sid); // Store in local storage
+          } else {
+              console.warn("No session ID received");
+          }
+      } catch (error) {
+          console.error("Error fetching session ID:", error);
+      }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -28,21 +46,23 @@ function Login({ onLoginSuccess }) {
         method: "POST",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
         body: JSON.stringify({ usr: email, pwd: password }),
-        
+        credentials: "include",
       });
 
       if (response.ok) {
         const data = await response.json();
-        const test = response.headers.get("Set-Cookie");
-        console.log(test)
+        // const test = response.headers.get("Set-Cookie");
+        // console.log("test set cookie: ",test)
         console.log("Login successful:", data);
+        getSessionId();
+        // console.log("Check: ",check);
 
-        const sessionId = data.sid || "";
-        console.log(sessionId)
-        localStorage.setItem("sid",sessionId)
-        if (sessionId) {
-          document.cookie = `sid=${sessionId}`;
-        }
+        // const sessionId = data.sid || "";
+        // console.log("session id: ",sessionId)
+        // localStorage.setItem("sid",sessionId)
+        // if (sessionId) {
+        //   document.cookie = `sid=${sessionId}`;
+        // }
 
         setTimeout(() => {
           onLoginSuccess({ email });
