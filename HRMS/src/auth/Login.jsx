@@ -12,23 +12,23 @@ function Login({ onLoginSuccess }) {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // Toggle state for password
 
-  const getSessionId = async () => {
-      try {
-          const response = await fetch(`${URL}api/method/get_session`, {
-              credentials: "include",
-          });
-          const data = await response.json();
+  // const getSessionId = async () => {
+  //     try {
+  //         const response = await fetch(`${URL}api/method/get_session`, {
+  //             credentials: "include",
+  //         });
+  //         const data = await response.json();
           
-          if (data.sid) {
-              console.log("Get Session ID:", data.sid);
-              localStorage.setItem("sid", data.sid); // Store in local storage
-          } else {
-              console.warn("No session ID received");
-          }
-      } catch (error) {
-          console.error("Error fetching session ID:", error);
-      }
-  };
+  //         if (data.sid) {
+  //             console.log("Get Session ID:", data.sid);
+  //             localStorage.setItem("sid", data.sid); // Store in local storage
+  //         } else {
+  //             console.warn("No session ID received");
+  //         }
+  //     } catch (error) {
+  //         console.error("Error fetching session ID:", error);
+  //     }
+  // };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -54,7 +54,7 @@ function Login({ onLoginSuccess }) {
         // const test = response.headers.get("Set-Cookie");
         // console.log("test set cookie: ",test)
         console.log("Login successful:", data);
-        getSessionId();
+        // getSessionId();
         // console.log("Check: ",check);
 
         // const sessionId = data.sid || "";

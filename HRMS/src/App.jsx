@@ -28,9 +28,6 @@ import { FrappeProvider, useFrappeGetDocList, useFrappeAuth} from 'frappe-react-
 function App() {
   const URL = import.meta.env.VITE_REACT_APP_URL;
 
-  const sessionId = localStorage.getItem("sid");
-  console.log("App session id",sessionId);
-
   // const getSessionId = async () => {
   //   try {
   //     const response = await fetch(`${URL}api/method/get_session`, {
@@ -43,7 +40,31 @@ function App() {
   //   }
   // };
 
-  // getSessionId();
+  const getSessionId = async () => {
+      try {
+          const response = await fetch(`${URL}api/method/get_session`, {
+              credentials: "include",
+          });
+          const data = await response.json();
+          
+          if (data.sid) {
+              console.log("Get Session ID:", data.sid);
+              localStorage.setItem("sid", data.sid); // Store in local storage
+          } else {
+              console.warn("No session ID received");
+          }
+      } catch (error) {
+          console.error("Error fetching session ID:", error);
+      }
+  };
+  // if(!localStorage.getItem("sid")){
+  //   getSessionId();
+  // }
+
+  getSessionId();
+
+  const sessionId = localStorage.getItem("sid");
+  console.log("App session id",sessionId);
 
   // const {currentUser, getUserCookie, login, logout} = useFrappeAuth()
 
