@@ -6,6 +6,6 @@ tags
 node_modules
 __pycache__
 
-scope/pulic/HRMS/
+scope/public/HRMS/
 scope/www/scope.html
 scope/HRMS/.env
