@@ -1,14 +1,7 @@
 import Sidebar from "./Components/Sidebar"
 import Header from "./Components/Header"
-import SummaryCards from "./Components/SummaryCards";
-import Birthdays from "./Components/Birthdays";
-import EmployeeChart from "./Components/EmployeeChart";
-import Footer from "./Components/Footer";
-
-import ApiFetch from "./Components/ApiFetch";
 import Login from "./auth/Login";
 import React, { useState, useEffect } from "react";
-import Home from "./Components/Home";
 import ContentBox from "./Components/ContentBox";
 
 import { FrappeProvider, useFrappeGetDocList, useFrappeAuth} from 'frappe-react-sdk'
