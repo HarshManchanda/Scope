@@ -40,31 +40,31 @@ function App() {
   //   }
   // };
 
-  const getSessionId = async () => {
-      try {
-          const response = await fetch(`${URL}api/method/get_session`, {
-              credentials: "include",
-          });
-          const data = await response.json();
+  // const getSessionId = async () => {
+  //     try {
+  //         const response = await fetch(`${URL}api/method/get_session`, {
+  //             credentials: "include",
+  //         });
+  //         const data = await response.json();
           
-          if (data.sid) {
-              console.log("Get Session ID:", data.sid);
-              localStorage.setItem("sid", data.sid); // Store in local storage
-          } else {
-              console.warn("No session ID received");
-          }
-      } catch (error) {
-          console.error("Error fetching session ID:", error);
-      }
-  };
-  // if(!localStorage.getItem("sid")){
-  //   getSessionId();
-  // }
+  //         if (data.sid) {
+  //             console.log("Get Session ID:", data.sid);
+  //             localStorage.setItem("sid", data.sid); // Store in local storage
+  //         } else {
+  //             console.warn("No session ID received");
+  //         }
+  //     } catch (error) {
+  //         console.error("Error fetching session ID:", error);
+  //     }
+  // };
+  // // if(!localStorage.getItem("sid")){
+  // //   getSessionId();
+  // // }
 
-  getSessionId();
+  // getSessionId();
 
-  const sessionId = localStorage.getItem("sid");
-  console.log("App session id",sessionId);
+  // const sessionId = localStorage.getItem("sid");
+  // console.log("App session id",sessionId);
 
   // const {currentUser, getUserCookie, login, logout} = useFrappeAuth()
 
@@ -104,9 +104,9 @@ function App() {
         // }, {});
 
         // const sid = cookies.sid;
-        const sid = localStorage.getItem("sid")
+        // const sid = localStorage.getItem("sid")
 
-        if (!sid) return;
+        // if (!sid) return;
 
         const response = await fetch(`${URL}api/method/get_test_2`, {
             method: "POST",
@@ -145,11 +145,10 @@ function App() {
     //   }, {})
     try{
 
-      const sid = localStorage.getItem("sid"); // Retrieve the session ID from cookies
-  
-      if (sid) {
+      const logged_in_user = localStorage.getItem("isLoggedIn")
+      if (logged_in_user) {
         // Make an API call to ERPNext's logout endpoint with the session ID
-        const response = await fetch(`${URL}api/method/logout?sid=${sid}`, {
+        const response = await fetch(`${URL}api/method/logout`, {
           method: "GET", // Since you're passing SID in the URL, you might want to use GET method
           credentials: "include", // Ensure cookies are included in the request
         });

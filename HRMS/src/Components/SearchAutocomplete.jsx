@@ -48,14 +48,14 @@ function SearchAutocomplete() {
         setResults([]); // Clear results on select
         setShowResults(false); // Close the result box after selection
         // Session management
-        const sid = localStorage.getItem("sid")
-        if (sid) {
+        const logged_in_user = localStorage.getItem("isLoggedIn")
+        if (logged_in_user) {
             // Format item for URL
             let formattedItem = item.toLowerCase().replace(/\s+/g, '-');
-            let url = `${URL}app/${encodeURIComponent(formattedItem)}?sid=${sid}`;
+            let url = `${URL}app/${encodeURIComponent(formattedItem)}`;
             window.open(url, "_blank"); // Open in a new tab
         } else {
-            alert("Session ID not found. Please log in again.");
+            alert("Not Logged in. Please log in again.");
         }
     };
 

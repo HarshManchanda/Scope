@@ -34,59 +34,60 @@ function ContentBox({ loggedInUser, onLogout, roles }){
     const [expensePending, setExpensePending] = useState(0);
     const [expenseApproved, setExpenseApproved] = useState(0);
     const [isHR, setIsHR] = useState(false);
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const FRAPPE_API_KEY = import.meta.env.VITE_REACT_APP_API_KEY;
     const FRAPPE_API_SECRET = import.meta.env.VITE_REACT_APP_API_SECRET;
     const URL = import.meta.env.VITE_REACT_APP_URL;
 
-    useEffect(() => {
-        const fetchCounts = async () => {
-            try {
-                const response = await fetch(`${URL}api/method/get_employee`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `token ${FRAPPE_API_KEY}:${FRAPPE_API_SECRET}`,
-                    },
-                    body: JSON.stringify({ user: loggedInUser }),
-                });
+    // useEffect(() => {
+    //     const fetchCounts = async () => {
+    //         try {
+    //             const response = await fetch(`${URL}api/method/get_employee`, {
+    //                 method: "POST",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     "Authorization": `token ${FRAPPE_API_KEY}:${FRAPPE_API_SECRET}`,
+    //                 },
+    //                 body: JSON.stringify({ user: loggedInUser }),
+    //             });
 
-                if (!response.ok) throw new Error("Failed to fetch data");
+    //             console.log("user content box: ",loggedInUser);
 
-                const result = await response.json();
+    //             if (!response.ok) throw new Error("Failed to fetch data");
+
+    //             const result = await response.json();
                 
-                if (result.message) {
-                    setEmployeeCount(result.message.employee_count || 0);
-                    setLeavePending(result.message.leave_pending || 0);
-                    setLeaveApproved(result.message.leave_approved || 0);
-                    setExpensePending(result.message.expense_pending || 0);
-                    setExpenseApproved(result.message.expense_approved || 0);
-                    setIsHR(result.message.is_hr || false);
-                }
+    //             if (result.message) {
+    //                 setEmployeeCount(result.message.employee_count || 0);
+    //                 setLeavePending(result.message.leave_pending || 0);
+    //                 setLeaveApproved(result.message.leave_approved || 0);
+    //                 setExpensePending(result.message.expense_pending || 0);
+    //                 setExpenseApproved(result.message.expense_approved || 0);
+    //                 setIsHR(result.message.is_hr || false);
+    //             }
 
-            } catch (err) {
-                setError(err.message || "Failed to fetch data.");
-            } finally {
-                setLoading(false);
-            }
-        };
+    //         } catch (err) {
+    //             setError(err.message || "Failed to fetch data.");
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
 
-        if (loggedInUser) {
-            fetchCounts(); // Fetch data only if loggedInUser is available
-            }
+    //     if (loggedInUser) {
+    //         fetchCounts(); // Fetch data only if loggedInUser is available
+    //         }
 
-        fetchCounts();
-    }, [loggedInUser]);
+    //     fetchCounts();
+    // }, [loggedInUser]);
 
     const handleCardClick = (doctype, filter, value) => {
-        const sid = localStorage.getItem("sid")
-
-        if (sid) {
+        const logged_in_user = localStorage.getItem("isLoggedIn")
+        if (logged_in_user) {
             let formattedItem = doctype.toLowerCase().replace(/\s+/g, '-');
 
-            let emp_url = `${URL}app/${encodeURIComponent(formattedItem)}?sid=${sid}`;
+            let emp_url = `${URL}app/${encodeURIComponent(formattedItem)}`;
     
             // Handle filters
             if (filter && value) {
@@ -95,12 +96,12 @@ function ContentBox({ loggedInUser, onLogout, roles }){
     
             window.open(emp_url, "_blank"); // Open in a new tab
         } else {
-            alert("Session ID not found. Please log in again.");
+            alert("Not Logged in. Please log in again.");
         }
 
     };
 
-    if (loading) return <p>Loading...</p>;
+    // if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
 
     return(

@@ -20,13 +20,13 @@ function Sidebar({ onLogout, roles }) {
     console.log("HR User:", isHRUser);
 
     const handleCardClick = (item) => {
-        const sid = localStorage.getItem("sid")
-        if (sid) {
+        const logged_in_user = localStorage.getItem("isLoggedIn")
+        if (logged_in_user) {
             let formattedItem = item.toLowerCase().replace(/\s+/g, '-');
-            let url = `${URL}app/${encodeURIComponent(formattedItem)}?sid=${sid}`;
+            let url = `${URL}app/${encodeURIComponent(formattedItem)}`;
             window.open(url, "_blank"); 
         } else {
-            alert("Session ID not found. Please log in again.");
+            alert("Not Logged in. Please log in again.");
         }
     };
 
