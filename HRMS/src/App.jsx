@@ -2,9 +2,12 @@ import Sidebar from "./Components/Sidebar"
 import Header from "./Components/Header"
 import Login from "./auth/Login";
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ContentBox from "./Components/ContentBox";
 
 import { FrappeProvider, useFrappeGetDocList, useFrappeAuth} from 'frappe-react-sdk'
+import SignInPage from "./auth/SignInPage";
+import OnboardingPage from "./auth/OnboardingPage";
 
 // function App(){
 //   return(
@@ -211,7 +214,12 @@ function App() {
           </main>
         </div>
       ) : (
-        <Login onLoginSuccess={handleLoginSuccess} />
+        <Router>
+          <Routes>
+            <Route path="/scope" element={<OnboardingPage/>} />
+            <Route path="/signin" element={<SignInPage onLoginSuccess={handleLoginSuccess} />} />
+          </Routes>
+        </Router>
       )}
       </FrappeProvider>
       

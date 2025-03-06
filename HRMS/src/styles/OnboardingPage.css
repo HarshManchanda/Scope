@@ -1,0 +1,131 @@
+.vDOnboardingWrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.onBoardingImage {
+    flex: 1;
+    background-image: url(../assets/images/onboarding-bg.png);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0 50px;
+    position: relative;
+}
+
+.onBoardingImage img {
+    max-width: 80%;
+    height: auto;
+    object-fit: contain;
+    object-position: bottom;
+}
+
+.onBoardingContent {
+    width: 480px;
+    max-width: 100%;
+    text-align: center;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.onBoardingContentInner {
+    max-width: 100%;
+}
+
+.onBoardingContentInner h2 {
+    margin: 0 0 22px;
+    font-size: 30px;
+    line-height: 36px;
+    color: #000;
+    font-weight: 900;
+}
+
+.onBoardingContentInner h5 {
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+    font-weight: 600;
+    margin: 0;
+}
+
+.onBoardingContentInner p {
+    margin: 20px 0 50px;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    font-weight: 400;
+}
+
+.letsStartBtn {
+    width: 100%;
+    background: linear-gradient(45deg, #F90280, #FA6C07);
+    padding: 17.5px 20px;
+    border-radius: 50px;
+    border: 0;
+    box-shadow: 0 0 44px 0 rgba(0, 0, 0, 0.05);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: capitalize;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+@media only screen and (max-width:991px) {
+    .vDOnboardingWrapper {
+        flex-direction: column;
+    }
+
+    .onBoardingImage {
+        width: 100%;
+        height: 50vh;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .onBoardingImage img {
+        max-width: 60%;
+    }
+
+    .onBoardingContent {
+        width: 100%;
+        padding: 30px;
+    }
+}
+
+@media only screen and (max-width:767px) {
+    .onBoardingImage {
+        height: 40vh;
+    }
+
+    .onBoardingContent {
+        padding: 30px 20px;
+    }
+
+    .onBoardingContentInner h2 {
+        font-size: 26px;
+    }
+
+    .onBoardingContentInner h5 {
+        font-size: 18px;
+    }
+
+    .onBoardingContentInner p {
+        font-size: 14px;
+    }
+
+    .letsStartBtn {
+        font-size: 14px;
+    }
+}

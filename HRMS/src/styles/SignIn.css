@@ -1,0 +1,164 @@
+.vDSignInWRapper {
+    display: flex;
+    height: 100vh;
+}
+
+.signInForm {
+    width: 480px;
+    text-align: center;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signInLogo {
+    flex-grow: 1;
+    background-image: url(../assets/images/sign-in-bg.png);
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signInLogo img {
+    max-width: 200px;
+}
+
+.signInFormInner h2 {
+    margin: 0 0 30px;
+    font-size: 30px;
+    line-height: 36px;
+    color: #000;
+    font-weight: 900;
+}
+
+.signInFormInner form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.signInFormGroup label {
+    display: block;
+    font-size: 14px;
+    color: #000;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.signInFormGroup input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 1px solid #E1E1E1;
+    border-radius: 30px;
+    font-size: 14px;
+    outline: none;
+}
+
+.signInFormGroup button {
+    width: 100%;
+    background: linear-gradient(45deg, #F90280, #FA6C07);
+    padding: 14px 20px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.forgotPasswordAction a {
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: underline;
+    background-image: linear-gradient(90deg, #F90280, #FA6C07);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.rememberMe {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rememberMe input {
+    width: auto;
+    margin: 0;
+}
+
+.rememberMe label {
+    margin: 0;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Show password eye custom css added by Harsh */
+
+.passwordInner {
+    position: relative; /* Parent container for positioning */
+    width: 100%; /* Full width of input */
+}
+
+.login-input {
+    width: 100%; /* Full width */
+    padding: 10px 40px 10px 10px; /* Add padding to the right for the icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box; /* Prevents content overflow */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px; /* Distance from the right */
+    top: 50%; /* Vertically center the icon */
+    transform: translateY(-50%); /* Adjust for exact centering */
+    cursor: pointer;
+    color: #999; /* Icon color */
+    font-size: 18px; /* Icon size */
+}
+
+.toggle-password:hover {
+    color: #333; /* Darker color on hover */
+}
+
+
+/* Responsive Fixes */
+@media only screen and (max-width: 991px) {
+    .signInForm {
+        width: 350px;
+        padding: 30px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .vDSignInWRapper {
+        flex-direction: column;
+    }
+
+    .signInForm {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .signInLogo {
+        height: 200px;
+        width: 100%;
+    }
+
+    .signInLogo img {
+        width: 100px;
+    }
+}
